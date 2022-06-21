@@ -1,0 +1,67 @@
+body{
+    background-color: #eeffef;
+}
+.bottom{
+    height: 20px;
+}
+.content_box{
+    /* 文章主体的盒子 */
+    margin: 2% 10%;;
+    font-size: 18px;
+    height: 28px;
+    font-family: Consolas, "Adobe 仿宋 Std R", sans-serif;
+}
+.title{
+    /*文字居中*/
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+.basic_info img {
+    width: 48%;
+    margin-right: 2%;
+    float: left;
+}
+.gender img {
+    width: 48%;
+    margin-right: 2%;
+    float: left;
+}
+.age img {
+    width: 48%;
+    margin-right: 2%;
+    float: left;
+}
+img{
+    border-radius: 22px;
+    border-color: black;
+    border-width: 2px;
+}
+.explain{
+    font-size: 14px;
+    height: 24px;
+    font-family: Consolas, "Adobe 仿宋 Std R", sans-serif;
+}
+.explain span{
+    width: 48%;
+    margin-right: 2%;
+    float: left;
+    margin-top: 3px;
+    margin-bottom: 2px;
+}
+.model img{
+    display: block;
+    margin: auto;
+}
+.model .explain{
+    display: block;
+    text-align: center;
+}
+.model_fit img{
+    display: block;
+    margin: auto;
+}
+.explain .explain{
+    display: block;
+    text-align: center;
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <meta charset="UTF-8">
+        <title>深圳市疫情详细分析</title>
+        <link href="../static/sz.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="content_box">
+            <div class="title"><h1>深圳市疫情详细报告</h1></div>
+            <div class="basic_info">
+                <h2 class="title">一、2020年1月份至2022年2月疫情趋势</h2>
+                <br />
+                <img src="static/imgs/cumulative.png" id="image1">
+                <img src="static/imgs/increase.png" id="image2">
+                <div class="explain">
+                    <span>图1: 深圳市新冠本土确诊病例累计数据</span>
+                    <span>图2: 深圳市新冠本土确诊单日新增数据</span>
+                </div>
+                <br />
+                <p>如图1和图2所示，可以看到深圳市有三轮较大的疫情爆发，分别是疫情扩散初期也即2020年1月到4月、2021年7月份以及2022年1月底这三次</p>
+            </div>
+            <div class="gender">
+                <h2 class="title">二、新冠确诊患者男女比例及趋势图</h2>
+                <br />
+                <img src="static/imgs/2022-04-30-gender.png">
+                <img src="static/imgs/2022-04-30-gdl.png">
+                <div class="explain">
+                    <span>图3: 截至2022年3月31日本土确诊病例男女比例</span>
+                    <span>图4: 深圳市新冠确诊患者 女:男 随时间变化的曲线</span>
+                </div>
+                <br />
+                <p>如图3和图4所示，患者中男女比例大致相当，但男性患者在统计时间段(2020年1月至2022年3月)始终都比女性更少一些</p>
+            </div>
+            <div class="age">
+                <h2 class="title">三、新冠确诊患者年龄分布统计图</h2>
+                <br />
+                <img src="static/imgs/2022-04-30-age_bar.png">
+                <img src="static/imgs/2022-04-30-teenage.png">
+                <div class="explain">
+                    <span>图5: 深圳市新冠本土确诊患者年龄分布</span>
+                    <span>图6: 青壮年(18-35岁)变化的曲线</span>
+                </div>
+                <br />
+                <p>如图5和图6所示，新冠疫情患者主要分布在青壮年(18-35岁)和中年(36-60岁)的年龄层，同时以青壮年为例，其占比随时间变化很小，稳定在36.3%左右</p>
+            </div>
+            <div class="model_exp">
+                <h2 class="title">四、新冠疫情趋势预测模型研究</h2>
+                <br />
+                <h3 class="title">（一）SEIR系列模型研究</h3>
+                <div class="explain">
+                    <p>SEIR系列模型是指一类通过将人群进行类别划分并建立各类人群转移关系来预测疫情发展趋势和感染患者高峰日期的数学模型，其具体表现形式是一个微分方程组，可以通过数值分析方法进行求解。</p>
+                    <p>这一系列模型包含SI模型, SIR模型, SEIR模型, m-SEIR模型等等，其中:</p>
+                    <p>
+                        &nbsp;&nbsp;S(Susceptible)易感者, 尚未接触过病患的健康人群, 可能患病<br />
+                        &nbsp;&nbsp;E(Exposed)潜伏者, 是指已经接触过传染病毒但未表现出症状的人<br />
+                        &nbsp;&nbsp;I(Infected)感染者, 是指感染病毒并表现出症状的人<br />
+                        &nbsp;&nbsp;R(Recovered)恢复者, 是指患病后恢复并获得免疫力不会再次患病的人
+                    </p>
+                    <p>与此同时, 模型假设人群数量是一个定值N, 且人群充分随即均匀流动。设有人群总数为N=1000, 初始有I0=7人患病，各模型模拟情况如下</p>
+                </div>
+                <br><br><br><br><br><br><br><br>
+                <div class="model">
+                    <h4>&nbsp;&nbsp;&nbsp;&nbsp;1. SI模型</h4>
+                    <div>
+                        SI模型适用于无法治愈的传染病, 只有S和I两类人群, 假设传染率为beta=0.272, 是指每一个病患平均每天使得beta个易感者感染成为病患。
+                        <br />
+                        <img src="static/imgs/2022_04_28_16_59_33_SI_0.272.png">
+                        <br />
+                        <div class="explain">图7. SI模型模拟示意图</div>
+                        <div>可以看到, 在没有人为干预的情况下, 疫情会以爆炸性的趋势蔓延, 约18天感染人数超过一般, 约30天所有人群均转为患病者</div>
+                    </div>
+                </div>
+                <div class="model">
+                    <h4>&nbsp;&nbsp;&nbsp;&nbsp;2. SIR模型</h4>
+                    <div>
+                        SIR模型相较于SI模型增加了R类人群, 认为感染者可治愈且不会二次感染。假设传染率为beta=0.272, 治愈率gama=0.0910
+                        <br />
+                        <img src="static/imgs/2022_04_28_16_59_33_SIR_0.272_0.091.png">
+                        <br />
+                        <div class="explain">图8. SIR模型模拟示意图</div>
+                        <div>整个过程中，易感者不断减少，恢复者不断增加，并在第80日认为疫情已经消除，对于患病者，出现了一个峰值的，这是模型预测最核心的部分，在预定假设下，峰值出现时间为第30日，人数为300人</div>
+                    </div>
+                </div>
+                <div class="model">
+                    <h4>&nbsp;&nbsp;&nbsp;&nbsp;3. SEIR模型</h4>
+                    <div>
+                        相较于SIR模型，考虑了E潜伏者，这一类人群在初期不易被发现（从而无法及时采取医疗措施）。E作为S转为I的角色出现, beta\gamma假设值同前, 并取alpha=0.0715表示E转为I的概率
+                        <br />
+                        <img src="static/imgs/2022_04_28_16_59_33_SEIR_0.272_0.0715_0.091.png">
+                        <br />
+                        <div class="explain">图9. SEIR模型模拟示意图</div>
+                        <div>可以看到，潜伏者与感染者走势基本相同，在同一时刻他们的和高于SIR模型中同时刻I的值，另外，在接近200天时，可认为疫解除。因此，潜伏者的出现增加了传染病的危险性，延缓了疫情解除时间</div>
+                    </div>
+                </div>
+                <div class="model">
+                    <h4>&nbsp;&nbsp;&nbsp;&nbsp;4. m-SEIR模型</h4>
+                    <div>
+                        m-SEIR模型, 没有进一步划分人群，对于SEIR模型中“仅感染者(I)可使易感者(S)感染(转为E类人群)”提出改进, 认为E类人群也可以使易感者(S)感染(转为E类人群)。alpha, gama不变, beta分裂为betaItoS=0.127和betaEtoS=0.145
+                        <br />
+                        这里给出m-SEIR的转移微分方程:
+                        &nbsp;&nbsp;(dS/dt) = -(S/N)*(beta1*I+beta2*E)<br />
+                        &nbsp;&nbsp;(dE/dt) = S*(beta1*I+beta2*E)-alpha*E<br />
+                        &nbsp;&nbsp;(dI/dt) = alpha*E-gamma*I<br />
+                        &nbsp;&nbsp;(dR/dt) = gamma*I<br />
+                        <br />
+                        <img src="static/imgs/2022_04_28_16_59_33_mSEIR_0.127_0.145_0.0715_0.091.png">
+                        <br />
+                        <div class="explain">图10. m-SEIR模型模拟示意图</div>
+                        <div>此时，相较于SEIR模型，一个重要的特征是，由于E的感染性，感染峰值时间点提前到50日左右</div>
+                    </div>
+                </div>
+                <br>
+                <div class="explain">
+                    &nbsp;&nbsp;总体来说, m-SEIR考虑到的因素比较全面, 尽管一些假设例如人群总数不变、人群之间充分随即均匀流动等等与实际不相符，但在人口基数较大时，这一模型在疫情爆发初期对于I感染患者的趋势预测以及峰值预测在仍具有一定的指导作用，也就是必须尽快采取医疗措施，尽可能地抑制峰值点到来。因此，接下来的工作是利用深圳市的历史新增数据，针对m-SEIR模型进行参数拟合，同时与深度学习模型LSTM网络等模型进行比较。
+                </div>
+                <br><br>
+            </div>
+            <div class="model_fit">
+                <h2 class="title">五、基于深圳市新冠疫情历史数据的模型参数拟合与比较</h2>
+                <br>
+                <h3 class="title">（一）、SEIR系列模型(m-SEIR)</h3>
+                <h3 class="title">&nbsp;&nbsp;&nbsp;&nbsp;1. 采集工作</h3>
+                <div class="explain">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;略</div>
+                <h3 class="title">&nbsp;&nbsp;&nbsp;&nbsp;2. 参数拟合</h3>
+                <div class="explain">
+                    经过对深圳市病例描述曲线(图1、图2)观察，选取自出现病例开始一直到新增病例基本为0并保持稳定的时间段，即2020-01-20到2020-04-15，共87日，字段包括：
+                    <br />&nbsp;date(日期)<br />&nbsp;incrConfirmed(新增确诊病例数)<br />&nbsp;incrHealed(新增治愈病例数)<br />&nbsp;incrDeath(新增死亡病例数)<br />&nbsp;totalConfirmed(累计确诊病例数)<br />&nbsp;totalHealed(累计治愈病例数)<br />&nbsp;totalDeath(累计死亡病例数)
+                    <br/><br/>
+                    同时，针对SEIR模型的四类人群，对于N也即人口总数，初始时认为与易感人群数量近似相等，确定为较累计确诊最大值稍大的值，这是由于易感人群在感染后即转为确诊病例，那么在基本维持人口数量不变且充分随即均匀流动的情况下，累积到的确诊患者最大数目与初期人口总数相当，因此设N0=430, 初始状态4人感染(I0=4), S0=N0-I0, E0=R0=0.
+                    <br /><br/>
+                    另外，注意到实际潜伏者由于不表现出症状，难以检测和发现，因此其数据实际未知，一个处理角度是：依据模拟图示来看，E与I成比例，可以拟合为k(t)*I，其中k(t)是比例系数。另外，对于I感染者，应理解为现存确诊人数，可以通过totalConfirmed-totalHealed-totalDeath得到。对于回复者，对应于totalHealed。最后S也就是易感人群，通过(N0-E(t)-I(t)-R(t))得到。
+                    <br /><br/>
+                    进一步考虑，是否有必要预测所有的四条曲线？微分方程中有四个变量需要拟合，采用E(t)=k(t)*I(t)实际上也不准确。从实际应用角度看，最有价值的是I(t)这一条曲线，同时实际数据也是准确的。因此可以仅依靠I, R这两部分的数据，但是参数本身有4个，对此，可以预先确定2个，这里是alpha(感染率)和gamma(治愈率)，依据医疗常规知识结合实际数据确定为alpha = 0.20, gamma = 1/25。此时便可以采取梯度下降算法进行拟合，这里的损失函数选为MSE，也就是均方误差最小，由于有四条曲线（优化后为两条），因此需要给出权值，确定为均分: Loss = 0.5*MSE(I) + 0.5*MSE(R)。最终拟合结果得到beta1=0.24974118114331306, beta2=-0.126141058570981.拟合图像如下:
+                    <br/><img src="static/imgs/mseir_0502_214200.png"><br/>
+                    <div class="explain">图11. m-SEIR模型在深圳市疫情数据集的拟合示意图</div>
+                </div>
+                <br /><br/><br /><br/><br /><br/><br /><br/><br /><br/><br /><br/><br /><br/>
+                <br /><br/><br /><br/><br /><br/><br /><br/><br /><br/><br /><br/><br /><br/>
+                <br /><br/><br /><br/><br /><br/><br /><br/><br /><br/><br /><br/><br /><br/>
+                <h3 class="title">（二）、深度学习系列模型(LSTM)</h3>
+                使用同样的数据集，利用LSTM对I和R进行预测，效果图如下：
+                <img src="static/imgs/0503_093942_IR.png">
+                <div class="explain">
+                    <div class="explain">
+                    图11. LSTM模型在深圳市疫情数据集的拟合示意图
+                    </div>
+                </div>
+                <br /><br/>
+                <img src="static/imgs/0503_093942_IR__loss.png">
+                <div class="explain">
+                    <div class="explain">
+                    图12. LSTM模型在深圳市疫情数据集的损失下降情况
+                    </div>
+                </div>
+                <br /><br/>
+                经过同一化的损失比较，m-SEIR在短期数据集上的预测能力优于LSTM模型，同时由于m-SEIR模型良好的解释性，在得到beta1和beta2后另外两条曲线也可绘制出来，因此在处理这一类问题时，SEIR系列模型具有更优的应用价值。另一方面，针对更多的数据，例如自2020年1月一直到2022年1月的数据，仅针对新增病例预测，有如下结果
+                <br />
+                <img src="static/imgs/2022-04-29-one.png">
+                <div class="explain">
+                    <div class="explain">
+                    图13. LSTM模型在深圳市疫情数据集(2020-2022)关于新增病例数的预测情况
+                    </div>
+                </div>
+                </div>
+                <br /><br/><br /><br/><br /><br/><br /><br/><br /><br/><br /><br/><br /><br/>
+                <br /><br/><br /><br/><br /><br/><br /><br/><br /><br/><br /><br/><br /><br/>
+                <br /><br/><br /><br/><br /><br/><br /><br/><br /><br/><br /><br/><br /><br/>
+            </div>
+        </div>
+    </body>
+</html>

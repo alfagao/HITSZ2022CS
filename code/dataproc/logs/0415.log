@@ -1,0 +1,69 @@
+"""
+    # download_url("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv", "covid19")
+
+        df = pd.read_csv("covid19/us-counties.csv")
+
+        # Remove rows with unknown counties.
+        df = df[df.county != "Unknown"]
+
+        # Merge with latitude and longitude.
+        url = "./covid19/User_Michael_J_County_table.html"
+        print("before read geo loc")
+        df_county_geoloc = pd.read_html(url)[0]
+        print("after read geo loc")
+        df_county_geoloc["Area"] = df_county_geoloc["Total Areakm²"]
+        df_county_geoloc = df_county_geoloc[["FIPS", "Longitude", "Latitude", "Area"]]
+
+        df_county_geoloc.Latitude = df_county_geoloc.Latitude.map(lambda s: float(s.replace("–", "-").replace("°", "")))
+        df_county_geoloc.Longitude = df_county_geoloc.Longitude.map(lambda s: float(s.replace("–", "-").replace("°", "")))
+        df_county_geoloc.FIPS = df_county_geoloc.FIPS.map(lambda x: float(x))
+        df = df.merge(df_county_geoloc, left_on="fips", right_on="FIPS", how="left")
+
+        # Fill in rows with NaN FIPS.
+        df.set_index("county", inplace=True)
+        missing_latlong = [
+            ["New York City", 40.7128, -74.0060, 783.8],
+            ["Kansas City", 39.0997, -94.5786, 815.72],
+            ["Joplin", 37.0842, -94.5133, 81.7],
+            ["Kusilvak Census Area", 62.1458, -162.8919, 44240],
+        ]
+
+        df_na = pd.DataFrame(missing_latlong, columns=["county", "Longitude", "Latitude", "Area"])
+        df_na.set_index("county", inplace=True)
+        df.update(df_na, overwrite=False)
+        df = df.reset_index()
+
+        # Remove Alaska and Hawaii.
+        df = df[df.state != "Alaska"]
+        df = df[df.state != "Hawaii"]
+
+        # Compute number of new cases/deaths each day instead of cumulative.
+        df.sort_values(by=["state", "county", "date"], inplace=True)
+
+        df["new_cases"] = df.groupby(["state", "county"])["cases"].diff().fillna(df["cases"])
+        df["new_deaths"] = df.groupby(["state", "county"])["deaths"].diff().fillna(df["deaths"])
+        df.to_csv("./covid19/us_all_cases.csv", index=False)
+        print("save raw data to us_all_cases.csv")
+"""
+
+"""
+    df = pd.read_csv("./covid19/us_all_cases.csv")
+    # Select time line from March to June.
+    df["date"] = pd.to_datetime(df["date"])
+    start_date = pd.Timestamp("2020-03-15")
+    end_date = pd.Timestamp("2020-08-01")
+    df = df[pd.DatetimeIndex(df.date) >= start_date]
+    df = df[pd.DatetimeIndex(df.date) <= end_date]
+
+    # Create numeric time column.
+    df["day"] = df["date"].apply(lambda x: float((x - start_date).days))
+
+    # Cases in New Jersey.
+    df = df[["day", "Longitude", "Latitude", "Area", "new_cases", "state", "county"]]
+    df = df[df.new_cases > 0]
+    df = df.loc[df.index.repeat(df.new_cases)]
+    df = df[df.state == "New Jersey"]
+
+    df.to_csv("./covid19/us_sample_cases.csv", index=False)
+    print("save sample data to us_sample_cases.csv")
+"""

@@ -1,0 +1,13 @@
+下午对【丁香园疫情播报发布页】以及仓库【DXY-COV19-Crawler】进行了详细探求：
+    发现：
+    首先作者的爬虫是直接对网页元素进行提取分析的，标签script内id为getAreaStat有
+    中国各省市截至当日的统计数据，但原作者代码看起来比较冗杂，获取到的数据居然也不完整
+    并且已有的数据还有重复的？以1月13日的发布（截至1月12日24时的数据统计）为例，经过数据分析
+    该标签内包含了34个省级行政区划以及下级区划（可能不完整）的数据，而依据该作者的最新发布来看，也是
+    一样的方法，却只得到17个省市的数据（暂且不论对错）
+生气！！
+    另外，使用网络Ctrl+R分析发现一系列json文件，包含一个省的历史数据（未到城市级）
+tencent
+
+https://api.inews.qq.com/newsqa/v1/query/inner/publish/modules/list?modules=statisGradeCityDetail,diseaseh5Shelf
+https://api.inews.qq.com/newsqa/v1/automation/modules/list?modules=FAutoforeignList

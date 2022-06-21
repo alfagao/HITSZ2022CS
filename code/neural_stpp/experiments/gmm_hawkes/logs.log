@@ -1,0 +1,96 @@
+gmm_hawkes_lr0.001_gc0_bsz4000x1_wd1e-06_s0_20220408_111503
+
+pytorch Module named_parameters 解析
+https://www.jianshu.com/p/bb88f7c08022
+通过 named_parameters 能够获取到所有的参数
+for name, param in model.named_parameters():
+        print(f"name: {name}, param: {param}")
+
+打算使用训练好的模型提取MS1M的人脸图像的特征进行聚类，记录一下。
+https://www.1024sou.com/article/12757.html
+
+# 查看参数
+print("\t\tname\tparameters")
+for name, param in model.named_parameters():
+    print(f"\t\t{name}\t{param}")
+"""
+		name	parameters
+		spatial_model.mu0	0.0
+		spatial_model.logstd0	0.0
+		spatial_model.coeff_decay	0.10000000149011612
+		spatial_model.spatial_logstd	0.10000000149011612
+		temporal_model.mu	Parameter containing:
+tensor([-1.8060], requires_grad=True)
+		temporal_model.alpha	Parameter containing:
+tensor([-3.1483], requires_grad=True)
+		temporal_model.beta	Parameter containing:
+tensor([0.4937], requires_grad=True)
+
+Process finished with exit code 0
+
+"""
+
+
+pytorch 使用训练好的模型预测新数据
+https://blog.csdn.net/Xiuxiu_Law/article/details/107956128
+import torch, glob, cv2
+from torchvision import transforms
+import numpy as np
+import torch.nn as nn
+import torch.nn.functional as F
+
+class Net(nn.Module):  # 神经网络部分用你自己的
+    def __init__(self):
+        super(Net, self).__init__()
+        self.conv1 = nn.Conv2d(1, 32, 3, 2, 1)  # nn.Conv2d(in_channels, out_channels, kernel_size, stride, padding)
+        self.conv2 = nn.Conv2d(32, 64, 3, 2, 1)
+        self.conv3 = nn.Conv2d(64, 128, 3, 1)
+        self.dropout1 = nn.Dropout2d(0.25)
+        self.dropout2 = nn.Dropout2d(0.5)
+        self.fc1 = nn.Linear(6272, 128)  # 6272=128*7*7
+        self.fc2 = nn.Linear(128, 8)
+
+    def forward(self, x):
+        x = self.conv1(x)
+        x = F.relu(x)
+        x = self.conv2(x)
+        x = F.relu(x)
+        x = self.conv3(x)
+        x = F.relu(x)
+        x = F.max_pool2d(x, 2)
+        x = self.dropout1(x)
+        x = torch.flatten(x, 1)
+        x = self.fc1(x)
+        x = F.relu(x)
+        x = self.dropout2(x)
+        x = self.fc2(x)
+        self.output = F.log_softmax(x, dim=1)
+        out1 = x
+        return self.output,out1
+
+
+def predict():
+    model = Net()
+    model.load_state_dict(torch.load('test.pt'))
+    torch.no_grad()
+    imgfile = glob.glob(r"")  # 输入要预测的图片所在路径
+    print(len(imgfile), imgfile)
+    for i in imgfile:
+        imgfile1 = i.replace("\\", "/")
+        img = cv2.imdecode(np.fromfile(imgfile1, dtype=np.uint8), cv2.IMREAD_GRAYSCALE)
+        img = cv2.resize(img, (64, 64))  # 是否需要resize取决于新图片格式与训练时的是否一致
+
+        tran = transforms.ToTensor()
+        img = img.reshape((*img.shape, -1))
+        img = tran(img)
+
+        img = img.unsqueeze(0)
+        outputs, out1 = model(img)  # outputs，out1修改为你的网络的输出
+        predicted, index  = torch.max(out1, 1)
+        degre = int(index[0])
+        list = [0, 45, -45, -90, 90, 135, -135, 180]
+        print(predicted, list[degre])
+
+
+if __name__ == '__main__':
+    predict()

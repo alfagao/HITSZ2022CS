@@ -1,0 +1,47 @@
+腾讯实时：
+https://news.qq.com/zt2020/page/feiyan.htm#/
+国外疫情数据：
+https://api.inews.qq.com/newsqa/v1/automation/foreign/daily/list?country=country_name
+
+
+新浪实时：
+https://news.sina.cn/zt_d/yiqing0121
+发现一个有价值信息：（世界各国数据统计【历史】）
+https://comment.sinaimg.cn/ncp/all_country_history_1642122660.csv
+当日数据API
+https://news.sina.com.cn/project/fymap/ncp2020_full_data.json
+
+凤凰网实时：
+https://news.ifeng.com/c/special/7tPlDSzDgVk
+仅含当日新增地区
+https://shankapi.ifeng.com/feedflow/coopdoc/wuhanyiqing_data_local_city_detail/info/callback1
+
+头条网实时：
+似乎有历史数据：研究！
+https://i.snssdk.com/forum/ncov_data/?data_type=%5B2%2C4%2C8%5D&src_type=map&recent_days=30
+
+丁香园：
+    ... ... 似乎停止了工作
+
+金投网：
+import requests
+import random
+from start.parameters import user_agent_list
+import urllib.parse as url_parse
+
+url_link = 'https://news.qq.com/zt2020/page/feiyan.htm'
+def get_html():
+    ua = random.choice(user_agent_list)
+    header = {'User-Agent': ua,
+              'Connection': 'close'}
+    res = requests.get(url_link, headers=header, verify=False)  # 获取url指向的网页资源内容
+    res.encoding = res.apparent_encoding  # 使用utf-8格式解码资源
+    return res.text
+
+if __name__ == '__main__':
+    sds = '%5B2%2C4%2C8%5D'
+    sty = url_parse.unquote(sds)
+    print(sty)
+
+
+

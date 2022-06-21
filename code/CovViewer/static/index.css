@@ -1,0 +1,120 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Consolas, 幼圆, monospace;
+    background: #333;
+}
+#top_nav{
+    /* 布局 */
+    position: absolute;
+    width: 40%;
+    left: 30%;
+    height: 10%;
+    top: 0;
+    /* 背景 */
+    background: #333;
+    /* 文字 */
+    font-size: 200%;
+    color: white;
+    /* 文字居中 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#time_stamp{
+    position: absolute;
+    /*width: 30%;*/
+    height: 10%;
+    top: 0;
+    right: 2%;
+    background: #333;
+    /* 文字 */
+    color: white;
+    font-family: Consolas, 仿宋, monospace;
+    font-size: 140%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: left;
+}
+#sz_link{
+    position: absolute;
+    height: 6%;
+    top: 0;
+    left: 4%;
+    bottom: 2%;
+    background: #333;
+    /* 文字 */
+    color: #f5cdff;
+    font-family: Consolas, "Microsoft YaHei UI", monospace;
+    font-size: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: left;
+}
+#left_top{
+    position: absolute;
+    top: 10%;
+    width: 30%;
+    height: 45%;
+    left: 0;
+    background: #d4c2c5;
+}
+#left_down{
+    position: absolute;
+    top: 55%;
+    width: 30%;
+    height: 45%;
+    left: 0;
+    background: #54879e;
+}
+#right_top{
+    position: absolute;
+    top: 10%;
+    width: 30%;
+    height: 45%;
+    right: 0;
+    background: #d8302f;
+}
+#right_down{
+    position: absolute;
+    top: 55%;
+    width: 30%;
+    height: 45%;
+    right: 0;
+    background: #7cb5cd;
+}
+#center_up{
+    position: absolute;
+    top: 10%;
+    width: 40%;
+    height: 30%;
+    left: 30%;
+    background: #333;
+}
+#center_down{
+    position: absolute;
+    top: 40%;
+    width: 40%;
+    height: 60%;
+    left: 30%;
+    background: #333;
+}
+.sm_data{
+    width: 25%;
+    float: left;    /* 定义float属性，使得div块可以浮动（水平） */
+    margin-top: 10%;
+    font-size: 200%;
+    color: #ffbf2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sm_label{
+    width: 25%;
+    font-size: 80%;
+    float: left;    /* 定义float属性，使得div块可以浮动（水平） */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

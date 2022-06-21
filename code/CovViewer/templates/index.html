@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>COVID-19</title>
+    <script src="../static/jquery.js"></script>
+    <script src="../static/echarts.js"></script>
+    <script src="../static/china.js"></script>
+    <link href="../static/index.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="main_container">
+        <div id="top_nav">疫情数据分析可视化</div>
+        <div id="time_stamp">2022-06-30 15:40</div>
+        <a id="sz_link" href="/sz_detail">点击此处跳转至深圳市详情页</a>
+        <div id="left_top">左上角</div>
+        <div id="left_down">左下角</div>
+        <div id="center_up">
+            <div class="sm_data" id="acc_conf">123</div>
+            <div class="sm_data" id="acc_heal">123</div>
+            <div class="sm_data" id="inc_conf">123</div>
+            <div class="sm_data" id="inc_heal">123</div>
+            <div class="sm_label"><h2>累计确诊</h2></div>
+            <div class="sm_label"><h2>累计治愈</h2></div>
+            <div class="sm_label"><h2>新增确诊</h2></div>
+            <div class="sm_label" ><h2>新增治愈</h2></div>
+        </div>
+        <div id="center_down">中间底部</div>
+        <div id="right_top">右上角</div>
+        <div id="right_down">右下角</div>
+    </div>
+
+    <!-- 中国地图echarts显示 -->
+	<script src="../static/index_china.js"></script>
+    <!-- 左上方显示中国累计确诊、死亡、治愈情况折线图 -->
+    <script src="../static/topleft.js"></script>
+    <!-- 左下方显示中国新增确诊、死亡、治愈情况折线图 -->
+    <script src="../static/leftbottom.js"></script>
+    <!-- 右上方显示中国新增确诊TOP10城市情况条形图 -->
+    <script src="../static/topright.js"></script>
+    <!-- 右下方显示中国新增治愈TOP10城市情况条形图 -->
+    <script src="../static/rightbottom.js"></script>
+	<!-- 数据获取与更新 -->
+    <script src="../static/controller.js"></script>
+</body>
+</html>
